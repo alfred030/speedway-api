@@ -1,24 +1,35 @@
 package com.galvanize.entites;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name="cars")
 public class Car {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nick_name")
     private String nickName;
+    @Column(name = "model")
     private Model model;
-    private String yea;
-    private List<Driver> drivers;
+    @Column(name = "year")
+    private String year;
+//    @Column(name = "drivers")
+//    private List<Driver> drivers;
+    @Column(name = "status")
     private Status status;
+    @Column(name = "topSpeed")
     private Long topSpeed;
+
 
     public Car(){}
 
-    public Car(String nickName, Model model, String yea, List<Driver> drivers, Status status, Long topSpeed) {
+    public Car(String nickName, Model model, String year, List<Driver> drivers, Status status, Long topSpeed) {
         this.nickName = nickName;
         this.model = model;
-        this.yea = yea;
-        this.drivers = drivers;
+        this.year = year;
+        //this.drivers = drivers;
         this.status = status;
         this.topSpeed = topSpeed;
     }
@@ -29,8 +40,8 @@ public class Car {
                 "id=" + id +
                 ", nickName='" + nickName + '\'' +
                 ", model=" + model +
-                ", yea='" + yea + '\'' +
-                ", drivers=" + drivers +
+                ", yea='" + year + '\'' +
+                //", drivers=" + drivers +
                 ", status=" + status +
                 ", topSpeed=" + topSpeed +
                 '}';
@@ -60,21 +71,21 @@ public class Car {
         this.model = model;
     }
 
-    public String getYea() {
-        return yea;
+    public String getYear() {
+        return year;
     }
 
-    public void setYea(String yea) {
-        this.yea = yea;
+    public void setYear(String yea) {
+        this.year = yea;
     }
 
-    public List<Driver> getDrivers() {
-        return drivers;
-    }
-
-    public void setDrivers(List<Driver> drivers) {
-        this.drivers = drivers;
-    }
+//    public List<Driver> getDrivers() {
+//        return drivers;
+//    }
+//
+//    public void setDrivers(List<Driver> drivers) {
+//        this.drivers = drivers;
+//    }
 
     public Status getStatus() {
         return status;
