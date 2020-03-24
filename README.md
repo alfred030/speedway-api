@@ -18,30 +18,30 @@ The status message for the response
 The data requested: lists must be an array and individual items must be an object/hash
 Example successful response:
 
-  {
-      "status": "OK",
-      "status_code": 200,
-      "data": [
-          {
-              "id": 43,
-              "nickname": "The Condor",
-              "model": "Corvette",
-              "year": "2019",
-              "driver": {...},
-              "status": "AVAILABLE",
-              "top_speed": 200
-          },
-          {
-              "id": 44,
-              "nickname": "Blue Fire",
-              "model": "Ferrari",
-              "year": "2017",
-              "driver": {...},
-              "status": "UNAVAILABLE",
-              "top_speed": 100
-          }
-      ]
-  }
+    {
+        "status": "OK",
+        "status_code": 200,
+        "data": [
+            {
+                "id": 43,
+                "nickname": "The Condor",
+                "model": "Corvette",
+                "year": "2019",
+                "driver": {...},
+                "status": "AVAILABLE",
+                "top_speed": 200
+            },
+            {
+                "id": 44,
+                "nickname": "Blue Fire",
+                "model": "Ferrari",
+                "year": "2017",
+                "driver": {...},
+                "status": "UNAVAILABLE",
+                "top_speed": 100
+            }
+        ]
+    }
 
 Example error response:
 
@@ -78,15 +78,15 @@ Cars come in the following models: Alpine, Ferrari, Maserati, Porsche, Nissan an
 
 An example of a car object:
 
-  {
-      "id": 43,
-      "nickname": "The Condor",
-      "model": "Corvette",
-      "year": "2019",
-      "driver": {...},
-      "status": "AVAILABLE",
-      "top_speed": 200
-  }
+    {
+        "id": 43,
+        "nickname": "The Condor",
+        "model": "Corvette",
+        "year": "2019",
+        "driver": {...},
+        "status": "AVAILABLE",
+        "top_speed": 200
+    }
   
 Drivers...
 have a first name, last name, nickname, age and birthdate
@@ -96,17 +96,18 @@ STRETCH GOAL: have records (RaceRecord), contains information about the results 
 STRETCH GOAL: have a sponsor.
 An example of a driver object:
 
-  {
-      "id": 332,
-      "first_name": "Maria",
-      "last_name": "Lopez",
-      "age": 22,
-      "nickname": "The Blaze",
-      "car": {...},
-      "records": [...],
-      "wins": 4,
-      "losses": 1
-  }
+    {
+        "id": 332,
+        "first_name": "Maria",
+        "last_name": "Lopez",
+        "age": 22,
+        "nickname": "The Blaze",
+        "car": {...},
+        "records": [...],
+        "wins": 4,
+        "losses": 1
+    }
+  
 Race...
 have a name, date, and best time (minutes, seconds, millseconds).
 have participants (Drivers)
@@ -117,15 +118,16 @@ Races have the following categories: open wheel, tour, sport car, rally, time at
 
 An example of a race object:
 
-  {
-      "id": 17,
-      "name": "Grand Prix III",
-      "category": "stock car",
-      "date": "2020-06-03",
-      "bestTime": "03:36:78",
-      "winner": {...},
-      "participants": [...]
-  }
+    {
+        "id": 17,
+        "name": "Grand Prix III",
+        "category": "stock car",
+        "date": "2020-06-03",
+        "bestTime": "03:36:78",
+        "winner": {...},
+        "participants": [...]
+    }
+  
 Stretch Goals
 If you complete the API before it's due, add any of the following features.
 
