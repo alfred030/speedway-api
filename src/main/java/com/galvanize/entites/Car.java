@@ -91,4 +91,8 @@ public class Car {
     public void setTopSpeed(Long topSpeed) {
         this.topSpeed = topSpeed;
     }
+
+    public Double convertToKilometerPerHour() {
+        return topSpeed * 1.60934;
+    }
 }
