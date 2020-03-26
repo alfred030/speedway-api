@@ -1,6 +1,13 @@
 package com.galvanize.entites;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,8 +24,10 @@ public class Driver {
     @Column(name="last_name")
     private String lastName;
 
-    @Column(name="age")
-    private int age;
+    @Column(name="birth_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    private Date birthDate;
 
     @Column(name="nick_name")
     private String nickName;
@@ -38,11 +47,23 @@ public class Driver {
 
     public Driver(){}
 
-    public Driver(String firstName, String lastName, int age, String nickName) {
+    public Driver(String firstName, String lastName, Date birthDate, String nickName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.birthDate = birthDate;
         this.nickName = nickName;
+    }
+
+    public int getAge() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.birthDate);
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DATE);
+        LocalDate ll = LocalDate.of(year, month, day);
+        LocalDate now = LocalDate.now();
+        Period diff = Period.between(ll, now);
+        return diff.getYears();
     }
 
     public Long getId() {
@@ -69,12 +90,12 @@ public class Driver {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getNickName() {
@@ -123,7 +144,7 @@ public class Driver {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
+                ", age=" + birthDate +
                 ", nickName='" + nickName + '\'' +
                 ", car=" + car +
                 ", records=" + records +
