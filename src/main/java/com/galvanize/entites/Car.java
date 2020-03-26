@@ -1,6 +1,7 @@
 package com.galvanize.entites;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,29 +10,35 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "nick_name")
     private String nickName;
+
     @Column(name = "model")
     private Model model;
+
     @Column(name = "year")
     private String year;
-//    @Column(name = "drivers")
-//    private List<Driver> drivers;
+
+    @Column(name = "drivers")
+    private List<Driver> drivers;
+
     @Column(name = "status")
     private Status status;
+
     @Column(name = "topSpeed")
     private Long topSpeed;
 
 
     public Car(){}
 
-    public Car(String nickName, Model model, String year, List<Driver> drivers, Status status, Long topSpeed) {
+    public Car(String nickName, Model model, String year, Status status, Long topSpeed) {
         this.nickName = nickName;
         this.model = model;
         this.year = year;
-        //this.drivers = drivers;
         this.status = status;
         this.topSpeed = topSpeed;
+        this.drivers = new ArrayList<>();
     }
 
     @Override
@@ -41,7 +48,7 @@ public class Car {
                 ", nickName='" + nickName + '\'' +
                 ", model=" + model +
                 ", yea='" + year + '\'' +
-                //", drivers=" + drivers +
+                ", drivers=" + drivers +
                 ", status=" + status +
                 ", topSpeed=" + topSpeed +
                 '}';
@@ -79,13 +86,13 @@ public class Car {
         this.year = yea;
     }
 
-//    public List<Driver> getDrivers() {
-//        return drivers;
-//    }
-//
-//    public void setDrivers(List<Driver> drivers) {
-//        this.drivers = drivers;
-//    }
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
+
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
+    }
 
     public Status getStatus() {
         return status;

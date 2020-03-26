@@ -17,17 +17,15 @@ class CarTest {
         String nickName = "CarDriver";
         Model model = Model.Ferrari;
         String year = "2019";
-        List<Driver> drivers = new ArrayList<>();
         Status status = Status.AVAILABLE;
         Long topSpeed = 100L;
-        car = new Car( nickName,  model,  year, drivers, status,topSpeed);
+        car = new Car( nickName,  model,  year, status,topSpeed);
     }
 
     @Test
     public void createCarTest(){
         assertEquals(car.getNickName(),"CarDriver");
         assertEquals(car.getStatus(), Status.AVAILABLE);
-        //assertEquals(car.getDrivers().size(),0);
     }
 
     @Test
