@@ -1,7 +1,6 @@
 package com.galvanize.services;
 
 import com.galvanize.entites.Car;
-import com.galvanize.entites.Driver;
 import com.galvanize.entites.Model;
 import com.galvanize.entites.Status;
 import com.galvanize.repository.CarRepository;
