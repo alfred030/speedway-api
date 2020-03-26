@@ -5,6 +5,7 @@ import com.galvanize.entites.Driver;
 import com.galvanize.entites.Model;
 import com.galvanize.entites.Status;
 import com.galvanize.repository.CarRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,22 +31,61 @@ class CarServiceTest {
     @Autowired
     CarRepository carRepository;
 
+    private Car car;
 
-    @Test
-    public void saveCarTest() {
-        //Setup
+
+    @BeforeEach
+    public void setup(){
         String nickName = "CarDriver";
         Model model = Model.Ferrari;
         String year = "2019";
         List<Driver> drivers = new ArrayList<>();
         Status status = Status.AVAILABLE;
         Long topSpeed = 100L;
-        Car expected = new Car( nickName,  model,  year, drivers, status,topSpeed);
-        //Exercise
-        Car actual = carService.save(expected);
-        //Assert
-        assertEquals(expected, actual);
-        //Teardown
+        car = new Car( nickName,  model,  year, drivers, status,topSpeed);
     }
+
+    @Test
+    public void saveCarTest() {
+
+        Car actual = carService.save(car);
+        assertEquals(car, actual);
+
+    }
+
+    @Test
+    public void getAllCarsTest(){
+
+        List<Car> expected = new ArrayList<>();
+        expected.add(carService.save(car));
+        List<Car> actual = carService.findAllCars();
+
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void findCarByIdTest(){
+        Car actual = carService.save(car);
+        Car expected = carService.findCarById(actual.getId()).get();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void updateCarNickNameTest(){
+        String newNickName = "UpdatedCarDriver";
+        Car actual = carService.save(car);
+        Car expected = carService.updateCarNickName(actual.getId(),newNickName);
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void deleteCarByIdTest(){
+        Car actual = carService.save(car);
+        carService.deleteCarById(car.getId());
+        assertThrows(RuntimeException.class, () -> carService.findCarById(actual.getId()).get());
+    }
+
 
 }
