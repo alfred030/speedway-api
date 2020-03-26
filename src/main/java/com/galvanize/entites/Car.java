@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name="cars")
 public class Car {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +21,7 @@ public class Car {
     @Column(name = "year")
     private String year;
 
+    @OneToMany(mappedBy = "car", orphanRemoval = false, cascade = CascadeType.ALL)
     @Column(name = "drivers")
     private List<Driver> drivers;
 

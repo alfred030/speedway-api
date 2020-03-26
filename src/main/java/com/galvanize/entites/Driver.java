@@ -23,11 +23,12 @@ public class Driver {
     @Column(name="nick_name")
     private String nickName;
 
-    @Column(name="car_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Car car;
 
+    @OneToMany
     @Column(name = "records")
-    private List<String> records;
+    private List<RaceRecord> records;
 
     @Column(name="wins")
     private int wins;
@@ -92,11 +93,11 @@ public class Driver {
         this.car = car;
     }
 
-    public List<String> getRecords() {
+    public List<RaceRecord> getRecords() {
         return records;
     }
 
-    public void setRecords(List<String> records) {
+    public void setRecords(List<RaceRecord> records) {
         this.records = records;
     }
 
