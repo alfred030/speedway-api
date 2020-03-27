@@ -16,6 +16,7 @@ public class Car {
     private String nickName;
 
     @Column(name = "model")
+    @Enumerated(EnumType.STRING)
     private Model model;
 
     @Column(name = "year")
