@@ -11,7 +11,8 @@ public class RaceRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="driver")
+    @OneToOne()
+    @JoinColumn(name="driver_id")
     private Driver driver;
 
     @Column(name = "status")
