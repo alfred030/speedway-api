@@ -16,7 +16,7 @@ public class Car {
     private String nickName;
 
     @Column(name = "model")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Model model;
 
     @Column(name = "year")

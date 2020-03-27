@@ -33,9 +33,12 @@ public class Race {
     @Column(name="best_time")
     private String bestTime;
 
-    @Column(name="winner")
+    @OneToOne()
+    @JoinColumn(name = "driver_id", nullable = true)
+   // @Column(name="winner")
     private Driver winner;
 
+    @ElementCollection(targetClass = Driver.class)
     @Column(name = "participants")
     private List<Driver> participants;
 
@@ -112,5 +115,18 @@ public class Race {
 
     public void setParticipants(List<Driver> participants) {
         this.participants = participants;
+    }
+
+    @Override
+    public String toString() {
+        return "Race{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", raceCategory=" + raceCategory +
+                ", date=" + date +
+                ", bestTime='" + bestTime + '\'' +
+                ", winner=" + winner +
+                ", participants=" + participants +
+                '}';
     }
 }

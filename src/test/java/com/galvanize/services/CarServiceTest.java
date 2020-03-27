@@ -36,11 +36,10 @@ class CarServiceTest {
     @BeforeEach
     public void setup(){
         String nickName = "CarDriver";
-        Model model = Model.Ferrari;
         String year = "2019";
         Status status = Status.AVAILABLE;
         Long topSpeed = 100L;
-        car = new Car( nickName,  model,  year, status,topSpeed);
+        car = new Car( nickName,  Model.Ferrari,  year, status,topSpeed);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.galvanize.entites;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="race_record")
@@ -10,10 +11,27 @@ public class RaceRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="driver")
+    private Driver driver;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
+
+    @Column(name="best_time")
+    private String bestTime;
+
+    @Column(name="top_speed")
+    private Long topSpeed;
 
     public RaceRecord(){}
+
+    public RaceRecord(Driver driver, Status status, String bestTime, Long topSpeed) {
+        this.driver = driver;
+        this.status = status;
+        this.bestTime = bestTime;
+        this.topSpeed = topSpeed;
+    }
 
     public Long getId() {
         return id;
@@ -23,11 +41,46 @@ public class RaceRecord {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getBestTime() {
+        return bestTime;
+    }
+
+    public void setBestTime(String bestTime) {
+        this.bestTime = bestTime;
+    }
+
+    public Long getTopSpeed() {
+        return topSpeed;
+    }
+
+    public void setTopSpeed(Long topSpeed) {
+        this.topSpeed = topSpeed;
+    }
+
+    @Override
+    public String toString() {
+        return "RaceRecord{" +
+                "id=" + id +
+                ", driver=" + driver +
+                ", status=" + status +
+                ", bestTime='" + bestTime + '\'' +
+                ", topSpeed=" + topSpeed +
+                '}';
     }
 }
