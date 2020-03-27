@@ -35,7 +35,6 @@ public class Race {
 
     @OneToOne()
     @JoinColumn(name = "driver_id", nullable = true)
-   // @Column(name="winner")
     private Driver winner;
 
     @ElementCollection(targetClass = Driver.class)
