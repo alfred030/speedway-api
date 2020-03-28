@@ -1,7 +1,10 @@
 package com.galvanize.controllers;
 
 import com.galvanize.entites.Car;
+import com.galvanize.responses.Response;
 import com.galvanize.services.CarService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,7 @@ import java.util.List;
 public class CarController {
 
     CarService carService;
+    Response response;
 
     public CarController(CarService carService){
         this.carService = carService;
@@ -30,21 +34,34 @@ public class CarController {
 
 
     @PostMapping(value = "/cars", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Car postCar(@RequestBody Car car){
-        return carService.save(car);
+    public Response postCar(@RequestBody Car car){
+        car = carService.save(car);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Header", "foo");
+        Response response = new Response(car , headers, HttpStatus.OK);
+        return response;
+
     }
 
 
     //READ
 
     @GetMapping("/cars")
-    public List<Car> getAllCars(){
-        return carService.findAllCars();
+    public Response getAllCars(){
+        List<Car> cars = carService.findAllCars();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Header", "foo");
+        Response response = new Response(cars , headers, HttpStatus.OK);
+        return response;
     }
 
     @GetMapping("/cars/{id}")
-    public Car getAllOrderById(@PathVariable long id){
-        return carService.findCarById(id);
+    public Response getAllOrderById(@PathVariable long id){
+        Car car = carService.findCarById(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Header", "foo");
+        Response response = new Response(car , headers, HttpStatus.OK);
+        return response;
     }
 
 
@@ -52,8 +69,12 @@ public class CarController {
 
 
     @PutMapping("/cars/{id}")
-    public Car updateCarById(@PathVariable long id, @RequestBody Car car){
-        return carService.updateCarById(id, car);
+    public Response updateCarById(@PathVariable long id, @RequestBody Car car){
+        car = carService.updateCarById(id, car);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Header", "foo");
+        Response response = new Response(car , headers, HttpStatus.OK);
+        return response;
     }
 
 
