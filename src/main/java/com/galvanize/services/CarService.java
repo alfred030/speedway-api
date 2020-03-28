@@ -4,9 +4,7 @@ import com.galvanize.entites.Car;
 import com.galvanize.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
-import javax.management.RuntimeErrorException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarService{
@@ -25,21 +23,20 @@ public class CarService{
         return carRepository.findAll();
     }
 
-    public Optional<Car> findCarById(Long id) {
+    public Car findCarById(Long id) {
         if(carRepository.findById(id).isPresent()){
-            return carRepository.findById(id);
+            return carRepository.findById(id).get();
         }else{
             throw new RuntimeException("Car id not found");
         }
     }
 
-    public Car updateCarNickName(Long id, String newNickName) {
+    public Car updateCarById(Long id, Car car) {
         if(carRepository.findById(id).isPresent()){
-            Car car = carRepository.findById(id).get();
-            car.setNickName(newNickName);
-            return car;
+            carRepository.save(car);
+            return carRepository.findById(id).get();
         }else{
-            throw new RuntimeException("Car id not found");
+            throw new RuntimeException("Driver id not found");
         }
     }
 

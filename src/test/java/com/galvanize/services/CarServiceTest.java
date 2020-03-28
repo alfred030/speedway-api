@@ -57,23 +57,25 @@ class CarServiceTest {
         expected.add(carService.save(car));
         List<Car> actual = carService.findAllCars();
 
-        assertEquals(expected,actual);
+        assertEquals(expected.size(),actual.size());
 
     }
 
     @Test
     public void findCarByIdTest(){
         Car actual = carService.save(car);
-        Car expected = carService.findCarById(actual.getId()).get();
+        Car expected = carService.findCarById(actual.getId());
         assertEquals(expected,actual);
     }
 
     @Test
     public void updateCarNickNameTest(){
         String newNickName = "UpdatedCarDriver";
-        Car actual = carService.save(car);
-        Car expected = carService.updateCarNickName(actual.getId(),newNickName);
-        assertEquals(expected,actual);
+        carService.save(car);
+        car.setNickName("Yellow Wasp");
+        car.setTopSpeed(212L);
+        Car actual = carService.updateCarById(car.getId(),car);
+        assertEquals(car.getNickName(),actual.getNickName());
 
     }
 
@@ -81,7 +83,7 @@ class CarServiceTest {
     public void deleteCarByIdTest(){
         Car actual = carService.save(car);
         carService.deleteCarById(car.getId());
-        assertThrows(RuntimeException.class, () -> carService.findCarById(actual.getId()).get());
+        assertThrows(RuntimeException.class, () -> carService.findCarById(actual.getId()));
     }
 
 
