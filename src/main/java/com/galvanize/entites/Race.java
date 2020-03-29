@@ -30,7 +30,7 @@ public class Race {
     @JsonFormat(pattern = "MM/dd/yyyy")
     private Date date;
 
-    @Column(name="best_time")
+    @Column(name="besttime")
     private String bestTime;
 
     @OneToOne()
